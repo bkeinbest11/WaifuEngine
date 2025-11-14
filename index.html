@@ -1,120 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WaifuDesk Donations</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WaifuDesk — Donate</title>
 <style>
-  body {
-    font-family: "Inter", sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #fdf6f0;
-    color: #222;
-  }
-  header {
-    background: #ffb347; /* soft orange gradient */
-    color: #fff;
-    padding: 16px;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 700;
-  }
-  main {
-    max-width: 700px;
-    margin: 24px auto;
-    padding: 16px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  h2 {
-    color: #444;
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
-  p {
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
-  .method {
-    background: #f9f9f9;
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 16px;
-    border: 1px solid #eee;
-  }
-  .method strong {
-    display: block;
-    margin-bottom: 6px;
-  }
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  input, textarea {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    font-size: 14px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  button {
-    background: #ffb347;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  button:hover {
-    background: #ffa33d;
-  }
-  footer {
-    text-align: center;
-    margin-top: 24px;
-    color: #666;
-    font-size: 12px;
-  }
+    body {
+        margin: 0;
+        padding: 0;
+        background: #f5f6fa;
+        font-family: "Inter", sans-serif;
+        color: #333;
+    }
+
+    header {
+        background: #6c5ce7;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        font-size: 26px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #2d3436;
+    }
+
+    p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .section {
+        margin-top: 25px;
+    }
+
+    .donate-box {
+        background: #fafafa;
+        border: 1px solid #e1e1e1;
+        padding: 18px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .copy {
+        background: #6c5ce7;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        float: right;
+    }
+
+    .copy:hover {
+        background: #5a4ad1;
+    }
+
+    .google-form-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: #00b894;
+        padding: 14px;
+        color: white;
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 18px;
+        margin-top: 25px;
+        font-weight: bold;
+    }
+
+    .google-form-btn:hover {
+        background: #009d7d;
+    }
+
+    .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 14px;
+        color: #777;
+    }
 </style>
 </head>
+
 <body>
-<header>
-  WaifuDesk Donations
-</header>
-<main>
-  <h2>Support WaifuDesk & Add Your Favorite Character</h2>
-  <p>
-    Donate via PayPal or crypto to submit your favorite waifu/apng/gif to be added to WaifuDesk. 
-    Fill out the form below after donating with your transaction details.
-  </p>
 
-  <div class="method">
-    <strong>PayPal:</strong>
-    bkeinbest11@gmail.com
-  </div>
-  <div class="method">
-    <strong>Crypto:</strong>
-    Solana: 7JfqmTGdXD7XrcLsGqrhCv3xXH5iQznVJq613GGxPjjT<br>
-    Ethereum: 0x2FeE837d6ABD384099d9f9172f0065Ce36202473
-    Bitcoin: bc1qppreqt2yuungu6kmf5sf77k464tzudtw8fdx59
-  </div>
-  <a class="button" href="" target="_blank">Submit Your Request</a>
-  <div class="leaderboard">
-    <div class="donor"></div>
+<header>WaifuDesk — Donation Page</header>
 
-    <!-- Add new donors manually here -->
-  </div>
+<div class="container">
 
-  
-</main>
-<footer>
-  WaifuDesk &copy; 2025 • Thank you for supporting!
-</footer>
+    <div class="section">
+        <h2>💖 Support WaifuDesk</h2>
+        <p>Thank you for using WaifuDesk!  
+        Your contributions help me add more characters, improve features, and keep everything free for everyone.</p>
+
+        <p>If you donate, you can request your own character to be added.  
+        After donating, please submit the Google Form below with your details.</p>
+    </div>
+
+    <div class="section">
+        <h2>💸 Donation Wallets</h2>
+
+        <div class="donate-box">
+            <b>Solana (SOL)</b><br>
+            <span id="sol">7JfqmTGdXD7XrcLsGqrhCv3xXH5iQznVJq613GGxPjjT</span>
+            <span class="copy" onclick="copyText('sol')">Copy</span>
+        </div>
+
+        <div class="donate-box">
+            <b>Ethereum (ETH)</b><br>
+            <span id="eth">0x2FeE837d6ABD384099d9f9172f0065Ce36202473</span>
+            <span class="copy" onclick="copyText('eth')">Copy</span>
+        </div>
+
+        <div class="donate-box">
+            <b>Bitcoin (BTC)</b><br>
+            <span id="btc">bc1qppreqt2yuungu6kmf5sf77k464tzudtw8fdx59</span>
+            <span class="copy" onclick="copyText('btc')">Copy</span>
+        </div>
+
+        <div class="donate-box">
+            <b>PayPal</b><br>
+            <span id="paypal">bkeinbest11@gmail.com</span>
+            <span class="copy" onclick="copyText('paypal')">Copy</span>
+        </div>
+    </div>
+
+    <a class="google-form-btn" href="YOUR_GOOGLE_FORM_LINK" target="_blank">
+        📄 Submit Donation Request Form
+    </a>
+
+    <div class="section">
+        <h2>🏆 Donor Leaderboard</h2>
+
+        <div class="donate-box">
+            <b>Top Donors:</b>
+            <ul>
+                <li>No donors yet — be the first!</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">© 2025 WaifuDesk — Made with ❤️ by Brandon</div>
+
+<script>
+function copyText(id) {
+    const txt = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(txt);
+    alert("Copied: " + txt);
+}
+</script>
+
 </body>
 </html>
