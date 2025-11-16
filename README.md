@@ -4,7 +4,7 @@ WaifuEngine adds a cute, floating anime character to your screen on every websit
 
 Features
 
-🧩 12+ animated anime girls to choose from
+🧩 15+ animated anime girls to choose from
 
 ⭐ Favorites system — pin your waifus to the top
 
