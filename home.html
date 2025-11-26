@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Waifu Engine — Features</title>
+<title>Waifu Engine</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     body {
         margin: 0;
-        background: #f5f5f7;
-        font-family: Arial, sans-serif;
+        background: #f4f4f6;
+        font-family: 'Inter', Arial, sans-serif;
         color: #222;
     }
 
     /* HEADER */
     header {
         width: 100%;
-        background: #ffffffcc;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        padding: 15px 0;
+        background: #ffffffdd;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        padding: 14px 0;
         position: sticky;
         top: 0;
         z-index: 1000;
     }
 
     .header-container {
-        max-width: 1000px;
+        max-width: 1100px;
         margin: auto;
         display: flex;
         align-items: center;
@@ -35,118 +35,118 @@
     }
 
     .header-logo {
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
         object-fit: cover;
     }
 
     .header-title {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 600;
+        letter-spacing: -0.3px;
     }
 
-    /* MAIN TITLE */
+    /* TITLE */
     h1 {
         text-align: center;
-        margin-top: 40px;
-        font-weight: 600;
-        font-size: 28px;
+        margin-top: 60px;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
     }
 
-    /* CONTENT */
+    /* WRAPPER */
     .container {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 40px 20px;
     }
 
+    /* FEATURE BLOCK */
     .feature-block {
         background: #fff;
-        border-radius: 14px;
-        padding: 20px;
-        margin-bottom: 40px;
-        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 50px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
 
+        /* Animations */
         opacity: 0;
-        transform: translateY(25px);
-        transition: all 0.7s ease-out;
+        transform: translateY(45px) scale(0.98);
+        transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .feature-block.show {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 
-    .feature-block img {
+    .feature-image {
         width: 100%;
-        border-radius: 12px;
-        margin-bottom: 15px;
+        height: 310px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 20px;
     }
 
     .feature-title {
-        font-size: 22px;
-        font-weight: 600;
-        margin-bottom: 10px;
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 12px;
     }
 
     .feature-desc {
-        font-size: 15px;
+        font-size: 16px;
         opacity: 0.75;
-        line-height: 1.5;
+        line-height: 1.6;
     }
 
     /* CTA BUTTON */
     .download-btn {
         display: block;
-        width: fit-content;
-        margin: 60px auto;
+        text-align: center;
+        margin: 70px auto 40px;
         background: #ff4fa3;
         color: #fff;
-        padding: 15px 28px;
-        font-size: 18px;
-        border-radius: 10px;
+        padding: 18px 35px;
+        font-size: 20px;
+        border-radius: 12px;
         text-decoration: none;
-        box-shadow: 0 4px 12px rgba(255,79,163,0.25);
-        transition: 0.2s ease;
+        width: fit-content;
+        box-shadow: 0 5px 15px rgba(255,79,163,0.25);
+        transition: 0.25s ease;
+        font-weight: 600;
     }
+
     .download-btn:hover {
-        background: #ff2e92;
-        transform: translateY(-2px);
+        background: #ff2a8c;
+        transform: translateY(-3px);
     }
 
     /* FOOTER */
     footer {
         background: #222;
         color: #eee;
-        padding: 20px 0;
+        padding: 25px 0;
         text-align: center;
-        margin-top: 50px;
-        font-size: 14px;
+        margin-top: 60px;
+        font-size: 15px;
     }
 
     /* MOBILE */
     @media (max-width: 600px) {
-
-        h1 {
-            font-size: 23px;
-            padding: 0 15px;
-        }
-
-        .feature-title {
-            font-size: 20px;
-        }
-
-        .header-title {
-            font-size: 18px;
-        }
+        h1 { font-size: 26px; }
+        .feature-title { font-size: 22px; }
+        .feature-block { padding: 22px; }
+        .feature-image { height: 220px; }
     }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
     <div class="header-container">
         <img src="logo.png" class="header-logo">
@@ -154,52 +154,53 @@
     </div>
 </header>
 
-<h1>Meet Your Browser’s Anime Companion</h1>
+<h1>Your Browser’s Anime Companion</h1>
 
 <div class="container">
 
-    <!-- Block 1 -->
     <div class="feature-block">
-        <img src="img1.png">
+        <img src="img1.png" class="feature-image">
         <div class="feature-title">Floating Anime Companion</div>
-        <div class="feature-desc">Your waifu stays on your screen, cute and supportive while you browse.</div>
+        <div class="feature-desc">
+            Your waifu gently follows you around while you browse. Smooth, cute, and always with you.
+        </div>
     </div>
 
-    <!-- Block 2 -->
     <div class="feature-block">
-        <img src="img2.png">
-        <div class="feature-title">One-Click Visibility Control</div>
-        <div class="feature-desc">Show and hide instantly through the popup. Quick, simple, clean.</div>
+        <img src="img2.png" class="feature-image">
+        <div class="feature-title">Quick Show / Hide Control</div>
+        <div class="feature-desc">
+            One tap to show her, one tap to hide her. Clean and distraction-free.
+        </div>
     </div>
 
-    <!-- Block 3 -->
     <div class="feature-block">
-        <img src="img3.png">
-        <div class="feature-title">Resizable — Up to 3x</div>
-        <div class="feature-desc">Scale her however you like. Waifu Engine remembers your last size.</div>
+        <img src="img3.png" class="feature-image">
+        <div class="feature-title">Resizable Up to 3×</div>
+        <div class="feature-desc">
+            Scale her however you want—small, big, or huge. Waifu Engine remembers your last choice.
+        </div>
     </div>
 
-    <!-- Block 4 -->
     <div class="feature-block">
-        <img src="img4.png">
-        <div class="feature-title">Add Your Own Characters</div>
-        <div class="feature-desc">Fully customizable. Hosts images from GitHub with instant updates.</div>
+        <img src="img4.png" class="feature-image">
+        <div class="feature-title">Fully Custom Characters</div>
+        <div class="feature-desc">
+            Upload any character you like. Hosted on GitHub with instant updates.
+        </div>
     </div>
 
 </div>
 
-<!-- CTA -->
 <a class="download-btn" href="https://chromewebstore.google.com/detail/onjpnopngnnkefokoigfmeepjidfhjnh" target="_blank">
-    Get Waifu Engine for free!
+    Get Waifu Engine for Free!
 </a>
 
-<!-- FOOTER -->
 <footer>
-    © 2025 Waifu Engine — Built with love in Chrome.
+    © 2025 Waifu Engine — Built with love.
 </footer>
 
 <script>
-    // Scroll reveal animation
     const blocks = document.querySelectorAll('.feature-block');
 
     const reveal = () => {
