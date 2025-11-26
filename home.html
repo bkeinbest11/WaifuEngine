@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Waifu Engine — Features</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        margin: 0;
+        background: #f5f5f7;
+        font-family: Arial, sans-serif;
+        color: #222;
+    }
+
+    /* HEADER */
+    header {
+        width: 100%;
+        background: #ffffffcc;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-container {
+        max-width: 1000px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 20px;
+    }
+
+    .header-logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        object-fit: cover;
+    }
+
+    .header-title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    /* MAIN TITLE */
+    h1 {
+        text-align: center;
+        margin-top: 40px;
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    /* CONTENT */
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .feature-block {
+        background: #fff;
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+        opacity: 0;
+        transform: translateY(25px);
+        transition: all 0.7s ease-out;
+    }
+
+    .feature-block.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .feature-block img {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .feature-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .feature-desc {
+        font-size: 15px;
+        opacity: 0.75;
+        line-height: 1.5;
+    }
+
+    /* CTA BUTTON */
+    .download-btn {
+        display: block;
+        width: fit-content;
+        margin: 60px auto;
+        background: #ff4fa3;
+        color: #fff;
+        padding: 15px 28px;
+        font-size: 18px;
+        border-radius: 10px;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(255,79,163,0.25);
+        transition: 0.2s ease;
+    }
+    .download-btn:hover {
+        background: #ff2e92;
+        transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+        background: #222;
+        color: #eee;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 50px;
+        font-size: 14px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+
+        h1 {
+            font-size: 23px;
+            padding: 0 15px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+        }
+
+        .header-title {
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-container">
+        <img src="logo.png" class="header-logo">
+        <div class="header-title">Waifu Engine</div>
+    </div>
+</header>
+
+<h1>Meet Your Browser’s Anime Companion</h1>
+
+<div class="container">
+
+    <!-- Block 1 -->
+    <div class="feature-block">
+        <img src="img1.png">
+        <div class="feature-title">Floating Anime Companion</div>
+        <div class="feature-desc">Your waifu stays on your screen, cute and supportive while you browse.</div>
+    </div>
+
+    <!-- Block 2 -->
+    <div class="feature-block">
+        <img src="img2.png">
+        <div class="feature-title">One-Click Visibility Control</div>
+        <div class="feature-desc">Show and hide instantly through the popup. Quick, simple, clean.</div>
+    </div>
+
+    <!-- Block 3 -->
+    <div class="feature-block">
+        <img src="img3.png">
+        <div class="feature-title">Resizable — Up to 3x</div>
+        <div class="feature-desc">Scale her however you like. Waifu Engine remembers your last size.</div>
+    </div>
+
+    <!-- Block 4 -->
+    <div class="feature-block">
+        <img src="img4.png">
+        <div class="feature-title">Add Your Own Characters</div>
+        <div class="feature-desc">Fully customizable. Hosts images from GitHub with instant updates.</div>
+    </div>
+
+</div>
+
+<!-- CTA -->
+<a class="download-btn" href="https://chromewebstore.google.com/detail/onjpnopngnnkefokoigfmeepjidfhjnh" target="_blank">
+    Get Waifu Engine for free!
+</a>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 Waifu Engine — Built with love in Chrome.
+</footer>
+
+<script>
+    // Scroll reveal animation
+    const blocks = document.querySelectorAll('.feature-block');
+
+    const reveal = () => {
+        const trigger = window.innerHeight * 0.85;
+
+        blocks.forEach(block => {
+            const rect = block.getBoundingClientRect().top;
+            if (rect < trigger) block.classList.add('show');
+        });
+    };
+
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
+</script>
+
+</body>
+</html>
