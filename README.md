@@ -18,7 +18,6 @@ Features
 
 📦 Lightweight and optimized
 
-💖 Optional donations to request new characters
 
 Customize Your Experience
 
@@ -26,4 +25,4 @@ Pick your favorite character and she will appear on every site you visit. Move h
 
 Support New Characters
 
-Want your own character added? Tap the Donate banner inside the extension popup. You can request any anime girl, OC, VTuber, PNGTuber, or waifu — animated or static.
+Join Discord: https://discord.gg/yZgNahpC3p
