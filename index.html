@@ -1,172 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WaifuEngine — Donate</title>
-<link rel="icon" href="favicon.png" type="image/png">
+<meta charset="UTF-8">
+<title>Waifu Engine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     body {
         margin: 0;
-        padding: 0;
-        background: #f5f6fa;
-        font-family: "Inter", sans-serif;
-        color: #333;
+        background: #f4f4f6;
+        font-family: 'Inter', Arial, sans-serif;
+        color: #222;
     }
 
+    /* HEADER */
     header {
-        background: #6c5ce7;
-        padding: 20px;
-        text-align: center;
-        color: white;
-        font-size: 26px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
-    }
-
-    .container {
-        max-width: 800px;
-        margin: 40px auto;
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    }
-
-    h2 {
-        margin-top: 0;
-        font-size: 22px;
-        color: #2d3436;
-    }
-
-    p {
-        line-height: 1.6;
-        margin-bottom: 15px;
-    }
-
-    .section {
-        margin-top: 25px;
-    }
-
-    .donate-box {
-        background: #fafafa;
-        border: 1px solid #e1e1e1;
-        padding: 18px;
-        border-radius: 12px;
-        margin-bottom: 15px;
-    }
-
-    .copy {
-        background: #6c5ce7;
-        color: white;
-        padding: 8px 14px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        float: right;
-    }
-
-    .copy:hover {
-        background: #5a4ad1;
-    }
-
-    .google-form-btn {
-        display: block;
         width: 100%;
-        text-align: center;
-        background: #00b894;
-        padding: 14px;
-        color: white;
+        background: #ffffffdd;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        padding: 14px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .header-container {
+        max-width: 1100px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 0 20px;
+    }
+
+    .header-logo {
+        width: 48px;
+        height: 48px;
         border-radius: 10px;
-        text-decoration: none;
-        font-size: 18px;
-        margin-top: 25px;
-        font-weight: bold;
+        object-fit: cover;
     }
 
-    .google-form-btn:hover {
-        background: #009d7d;
+    .header-title {
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
     }
 
-    .footer {
+    /* TITLE */
+    h1 {
         text-align: center;
-        margin-top: 40px;
-        font-size: 14px;
-        color: #777;
+        margin-top: 60px;
+        font-size: 34px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    /* WRAPPER */
+    .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    /* FEATURE BLOCK */
+    .feature-block {
+        background: #fff;
+        border-radius: 20px;
+        padding: 30px;
+        margin-bottom: 50px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+
+        /* Animations */
+        opacity: 0;
+        transform: translateY(45px) scale(0.98);
+        transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .feature-block.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    .feature-image {
+        width: 100%;
+        height: 310px;
+        object-fit: cover;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+
+    .feature-title {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .feature-desc {
+        font-size: 16px;
+        opacity: 0.75;
+        line-height: 1.6;
+    }
+
+    /* CTA BUTTON */
+    .download-btn {
+        display: block;
+        text-align: center;
+        margin: 70px auto 40px;
+        background: #ff4fa3;
+        color: #fff;
+        padding: 18px 35px;
+        font-size: 20px;
+        border-radius: 12px;
+        text-decoration: none;
+        width: fit-content;
+        box-shadow: 0 5px 15px rgba(255,79,163,0.25);
+        transition: 0.25s ease;
+        font-weight: 600;
+    }
+
+    .download-btn:hover {
+        background: #ff2a8c;
+        transform: translateY(-3px);
+    }
+
+    /* FOOTER */
+    footer {
+        background: #222;
+        color: #eee;
+        padding: 25px 0;
+        text-align: center;
+        margin-top: 60px;
+        font-size: 15px;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+        h1 { font-size: 26px; }
+        .feature-title { font-size: 22px; }
+        .feature-block { padding: 22px; }
+        .feature-image { height: 220px; }
     }
 </style>
 </head>
 
 <body>
 
-<header>WaifuEngine — Donation Page</header>
+<header>
+    <div class="header-container">
+        <img src="logo.png" class="header-logo">
+        <div class="header-title">Waifu Engine</div>
+    </div>
+</header>
+
+<h1>Your Browser’s Anime Companion</h1>
 
 <div class="container">
 
-    <div class="section">
-        <h2>💖 Support WaifuEngine</h2>
-        <p>Thank you for using WaifuEngine!  
-        Your contributions help me add more characters, improve features, and keep everything free for everyone.</p>
-
-        <p>If you donate, you can request your own character to be added.  
-        After donating, please submit the Google Form below with your details.</p>
+    <div class="feature-block">
+        <img src="img1.png" class="feature-image">
+        <div class="feature-title">Floating Anime Companion</div>
+        <div class="feature-desc">
+            Your waifu gently follows you around while you browse. Smooth, cute, and always with you.
+        </div>
     </div>
 
-    <div class="section">
-        <h2>💸 Donation Wallets</h2>
-
-        <div class="donate-box">
-            <b>Solana (SOL)</b><br>
-            <span id="sol">3bUvfxnk4TgUmkFeAxSr3pUTfT9PytSTGNGuTVJgcrd9</span>
-            <span class="copy" onclick="copyText('sol')">Copy</span>
+    <div class="feature-block">
+        <img src="img2.png" class="feature-image">
+        <div class="feature-title">Quick Show / Hide Control</div>
+        <div class="feature-desc">
+            One tap to show her, one tap to hide her. Clean and distraction-free.
         </div>
-
-        <div class="donate-box">
-            <b>Ethereum (ETH)</b><br>
-            <span id="eth">0xdbD001F21aEfF11dF1fC695cC53b4fC5B7c8C0D2</span>
-            <span class="copy" onclick="copyText('eth')">Copy</span>
-        </div>
-
-        <div class="donate-box">
-            <b>Bitcoin (BTC)</b><br>
-            <span id="btc">1KargYjhF1dV9NapJr3D2VcA7WR32m6LfV</span>
-            <span class="copy" onclick="copyText('btc')">Copy</span>
-        </div>
-
     </div>
 
-    <a class="google-form-btn" href="https://forms.gle/KakKL3s4VdL5JSw66" target="_blank">
-        📄 Submit Donation Request Form
-    </a>
-    
-    <a class="google-form-btn" href="https://forms.gle/nBq4VoqA71EYZ8jWA" target="_blank">
-        📄 Bug/Feedback Form
-    </a>
+    <div class="feature-block">
+        <img src="img3.png" class="feature-image">
+        <div class="feature-title">Resizable Up to 3×</div>
+        <div class="feature-desc">
+            Scale her however you want—small, big, or huge. Waifu Engine remembers your last choice.
+        </div>
+    </div>
 
-    <div class="section">
-        <h2>🏆 Donor Leaderboard</h2>
-
-        <div class="donate-box">
-            <b>Top Donors:</b>
-            <ul>
-                <li>No donors yet — be the first!</li>
-            </ul>
+    <div class="feature-block">
+        <img src="img4.png" class="feature-image">
+        <div class="feature-title">Fully Custom Characters</div>
+        <div class="feature-desc">
+            Upload any character you like. Hosted on GitHub with instant updates.
         </div>
     </div>
 
 </div>
-<p>If you have questions, please contact us at: <a href="mailto:bkeinbest11@gmail.com">bkeinbest11@gmail.com</a></p>
-<div class="footer">© 2025 WaifuEngine — Made with ❤️ by Brandon</div>
+
+<a class="download-btn" href="https://chromewebstore.google.com/detail/onjpnopngnnkefokoigfmeepjidfhjnh" target="_blank">
+    Get Waifu Engine for Free!
+</a>
+
+<footer>
+    © 2025 Waifu Engine — Built with love.
+</footer>
 
 <script>
-function copyText(id) {
-    const txt = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(txt);
-    alert("Copied: " + txt);
-}
+    const blocks = document.querySelectorAll('.feature-block');
+
+    const reveal = () => {
+        const trigger = window.innerHeight * 0.85;
+
+        blocks.forEach(block => {
+            const rect = block.getBoundingClientRect().top;
+            if (rect < trigger) block.classList.add('show');
+        });
+    };
+
+    window.addEventListener('scroll', reveal);
+    window.addEventListener('load', reveal);
 </script>
 
 </body>
