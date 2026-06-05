@@ -567,11 +567,12 @@ footer{
             </div>
           </div>
         </div>
-        <div class="waifu-overlay">
+        <div class="waifu-overlay" id="waifuDrag" style="position:absolute;bottom:20px;right:20px;cursor:grab;user-select:none;touch-action:none">
           <div style="position:relative">
-            <div class="waifu-drag-hint">Drag me!</div>
+            <div class="waifu-drag-hint" id="dragHint">Drag me!</div>
             <div class="waifu-char"><img src="animagirls/teto.apng" style="width:100%;height:100%;object-fit:cover;border-radius:14px"/></div>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -733,7 +734,40 @@ document.querySelectorAll('.btn-primary,.btn-secondary').forEach(btn=>{
   })
   btn.addEventListener('mouseleave',()=>{btn.style.transform=''})
 })
+// ── DRAGGABLE TETO ──
+const waifu = document.getElementById('waifuDrag')
+const hint = document.getElementById('dragHint')
+const content = waifu.closest('.browser-content')
+let dragging = false, ox = 0, oy = 0
 
+waifu.addEventListener('mousedown', e => {
+  dragging = true
+  const r = waifu.getBoundingClientRect()
+  ox = e.clientX - r.left
+  oy = e.clientY - r.top
+  waifu.style.cursor = 'grabbing'
+  hint.style.display = 'none'
+  e.preventDefault()
+})
+
+document.addEventListener('mousemove', e => {
+  if (!dragging) return
+  const cr = content.getBoundingClientRect()
+  const wr = waifu.getBoundingClientRect()
+  let x = e.clientX - cr.left - ox
+  let y = e.clientY - cr.top - oy
+  x = Math.max(0, Math.min(cr.width - wr.width, x))
+  y = Math.max(0, Math.min(cr.height - wr.height, y))
+  waifu.style.left = x + 'px'
+  waifu.style.top = y + 'px'
+  waifu.style.bottom = 'auto'
+  waifu.style.right = 'auto'
+})
+
+document.addEventListener('mouseup', () => {
+  dragging = false
+  waifu.style.cursor = 'grab'
+})
 // ── PARTICLES ──
 const container = document.getElementById('particles')
 for(let i=0;i<18;i++){
