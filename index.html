@@ -1,1 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Waifu Engine — Anime Overlay for Chrome</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
+:root{
+  --pink:#ff4d8f;
+  --pink2:#ff85b3;
+  --purple:#9b5de5;
+  --yellow:#ffe066;
+  --cyan:#00d4ff;
+  --bg:#0d0b14;
+  --bg2:#160e24;
+  --card:#1e1232;
+  --border:rgba(255,77,143,0.25);
+  --text:#fff;
+  --muted:#b39bc8;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Nunito',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.5;
+}
+
+/* ── FLOATING SHAPES BG ── */
+.bg-shapes{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bg-shapes span{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:.12;
+}
+.bg-shapes span:nth-child(1){width:600px;height:600px;background:var(--pink);top:-200px;left:-100px;animation:drift 20s ease-in-out infinite}
+.bg-shapes span:nth-child(2){width:500px;height:500px;background:var(--purple);bottom:-100px;right:-100px;animation:drift 25s ease-in-out infinite reverse}
+.bg-shapes span:nth-child(3){width:300px;height:300px;background:var(--cyan);top:50%;left:50%;animation:drift 18s ease-in-out infinite 5s}
+
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.05)}
+  66%{transform:translate(-20px,30px) scale(0.95)}
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(13,11,20,0.8);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:22px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:1px;
+}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;border:none;padding:10px 24px;border-radius:100px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:14px;
+  cursor:pointer;text-decoration:none;transition:opacity .2s,transform .15s;
+  display:inline-block;
+}
+.nav-cta:hover{opacity:.85;transform:scale(1.03)}
+
+/* ── SECTIONS ── */
+section{position:relative;z-index:1}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,77,143,.12);
+  border:1px solid rgba(255,77,143,.3);
+  border-radius:100px;
+  padding:6px 18px;
+  font-size:13px;font-weight:700;color:var(--pink2);
+  margin-bottom:32px;
+  animation:fadeUp .8s ease both;
+}
+.hero-badge::before{content:'✦';font-size:10px}
+
+.hero h1{
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:clamp(52px,10vw,110px);
+  line-height:1;
+  letter-spacing:-2px;
+  animation:fadeUp .8s ease .1s both;
+}
+.hero h1 .line1{display:block;color:var(--text)}
+.hero h1 .line2{
+  display:block;
+  background:linear-gradient(135deg,var(--pink) 0%,var(--purple) 50%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+.hero-sub{
+  margin-top:24px;
+  font-size:clamp(16px,2.5vw,20px);
+  color:var(--muted);
+  max-width:540px;
+  line-height:1.7;
+  animation:fadeUp .8s ease .2s both;
+}
+
+.hero-btns{
+  display:flex;gap:16px;flex-wrap:wrap;justify-content:center;
+  margin-top:40px;
+  animation:fadeUp .8s ease .3s both;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;border:none;padding:16px 36px;border-radius:100px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;
+  cursor:pointer;text-decoration:none;
+  transition:opacity .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 0 40px rgba(255,77,143,.3);
+}
+.btn-primary:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 0 60px rgba(255,77,143,.5)}
+.btn-secondary{
+  background:transparent;
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.2);
+  padding:16px 36px;border-radius:100px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:16px;
+  cursor:pointer;text-decoration:none;
+  transition:border-color .2s,background .2s;
+}
+.btn-secondary:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+
+/* ── HERO BROWSER MOCKUP ── */
+.hero-mockup{
+  margin-top:72px;
+  position:relative;
+  width:100%;max-width:860px;
+  animation:fadeUp .8s ease .45s both;
+}
+.browser{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 0 1px rgba(255,77,143,.1);
+}
+.browser-bar{
+  background:#1a1030;
+  padding:12px 16px;
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.browser-dots{display:flex;gap:6px}
+.browser-dot{width:12px;height:12px;border-radius:50%}
+.browser-dot:nth-child(1){background:#ff5f57}
+.browser-dot:nth-child(2){background:#febc2e}
+.browser-dot:nth-child(3){background:#28c840}
+.browser-url{
+  flex:1;background:rgba(255,255,255,.07);border-radius:6px;
+  padding:5px 12px;font-size:12px;color:var(--muted);
+}
+.browser-content{
+  background:linear-gradient(160deg,#0f1a2e 0%,#1a0f2e 100%);
+  height:380px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  font-size:15px;color:var(--muted);
+}
+.browser-content::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 70% 50%,rgba(155,93,229,.15) 0%,transparent 60%);
+}
+
+/* fake webpage inside browser */
+.fake-page{width:100%;height:100%;padding:28px;display:grid;grid-template-columns:1fr 260px;gap:20px;position:relative}
+.fake-page-main{}
+.fake-bar{height:10px;border-radius:4px;background:rgba(255,255,255,.08);margin-bottom:10px}
+.fake-bar.short{width:60%}
+.fake-bar.med{width:80%}
+.fake-bar.tall{height:60px;width:100%}
+.fake-img-block{height:140px;background:rgba(255,255,255,.04);border-radius:8px;margin-top:12px;border:1px solid rgba(255,255,255,.06)}
+
+/* waifu overlay in mockup */
+.waifu-overlay{
+  position:absolute;
+  bottom:20px;right:20px;
+  animation:waifu-float 3s ease-in-out infinite;
+}
+.waifu-char{
+  width:120px;height:160px;
+  background:linear-gradient(160deg,rgba(255,77,143,.25),rgba(155,93,229,.2));
+  border-radius:16px;
+  border:1px solid rgba(255,77,143,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:64px;
+  box-shadow:0 20px 60px rgba(255,77,143,.3),0 0 0 1px rgba(255,77,143,.2);
+  backdrop-filter:blur(10px);
+}
+.waifu-drag-hint{
+  position:absolute;top:-28px;left:50%;transform:translateX(-50%);
+  background:rgba(255,77,143,.9);color:#fff;
+  font-size:10px;font-weight:800;
+  padding:4px 10px;border-radius:100px;white-space:nowrap;
+}
+.waifu-drag-hint::after{content:'';position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);width:8px;height:8px;background:rgba(255,77,143,.9);clip-path:polygon(0 0,100% 0,50% 100%)}
+
+@keyframes waifu-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+
+/* extension popup mockup */
+.popup-mockup{
+  position:absolute;top:16px;right:16px;
+  width:180px;
+  background:rgba(22,14,36,.95);
+  border:1px solid rgba(255,77,143,.3);
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.popup-btn-row{display:flex;gap:6px;margin-bottom:8px}
+.popup-btn{flex:1;padding:5px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);font-size:9px;color:var(--muted);text-align:center;font-weight:700}
+.popup-char-row{display:flex;align-items:center;gap:8px;padding:5px;background:rgba(255,77,143,.08);border-radius:8px;border:1px solid rgba(255,77,143,.2)}
+.popup-char-thumb{width:28px;height:28px;border-radius:5px;background:linear-gradient(135deg,rgba(255,77,143,.4),rgba(155,93,229,.3));display:flex;align-items:center;justify-content:center;font-size:14px}
+.popup-char-name{font-size:9px;color:#fff;font-weight:700}
+
+/* ── STATS ── */
+.stats{
+  display:flex;justify-content:center;gap:0;
+  max-width:700px;margin:0 auto;
+  padding:0 24px 80px;
+}
+.stat{
+  flex:1;text-align:center;
+  padding:32px 24px;
+  border:1px solid var(--border);
+  position:relative;
+}
+.stat:first-child{border-radius:16px 0 0 16px}
+.stat:last-child{border-radius:0 16px 16px 0}
+.stat:not(:last-child){border-right:none}
+.stat-num{
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:36px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.stat-label{font-size:12px;color:var(--muted);font-weight:700;margin-top:4px;text-transform:uppercase;letter-spacing:1px}
+
+/* ── FEATURES ── */
+.features{padding:80px 24px 100px;max-width:1100px;margin:0 auto}
+.section-label{
+  text-align:center;
+  font-size:12px;font-weight:800;
+  color:var(--pink);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:14px;
+}
+.section-title{
+  text-align:center;
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:clamp(32px,5vw,52px);
+  line-height:1.1;
+  margin-bottom:16px;
+}
+.section-sub{
+  text-align:center;color:var(--muted);
+  font-size:17px;max-width:500px;margin:0 auto 60px;
+  line-height:1.7;
+}
+
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+.feature-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:32px 28px;
+  transition:transform .2s,border-color .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+}
+.feature-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 0% 0%,rgba(255,77,143,.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.feature-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,77,143,.5);
+  box-shadow:0 20px 60px rgba(255,77,143,.1);
+}
+.feature-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:20px;
+}
+.fi-pink{background:rgba(255,77,143,.15);border:1px solid rgba(255,77,143,.3)}
+.fi-purple{background:rgba(155,93,229,.15);border:1px solid rgba(155,93,229,.3)}
+.fi-cyan{background:rgba(0,212,255,.15);border:1px solid rgba(0,212,255,.3)}
+.fi-yellow{background:rgba(255,224,102,.15);border:1px solid rgba(255,224,102,.3)}
+.feature-card h3{font-size:18px;font-weight:800;margin-bottom:10px}
+.feature-card p{font-size:14px;color:var(--muted);line-height:1.7}
+
+/* ── HOW IT WORKS ── */
+.how{padding:80px 24px 100px;max-width:900px;margin:0 auto}
+.steps{display:flex;flex-direction:column;gap:0;margin-top:60px;position:relative}
+.steps::before{
+  content:'';
+  position:absolute;left:28px;top:28px;bottom:28px;width:2px;
+  background:linear-gradient(to bottom,var(--pink),var(--purple),var(--cyan));
+  border-radius:2px;
+}
+.step{
+  display:flex;gap:28px;align-items:flex-start;
+  padding:0 0 48px;position:relative;
+}
+.step:last-child{padding-bottom:0}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Dela Gothic One',sans-serif;font-size:20px;
+  flex-shrink:0;z-index:1;
+  box-shadow:0 0 0 6px var(--bg),0 0 0 8px rgba(255,77,143,.2);
+}
+.step-content h3{font-size:20px;font-weight:800;margin-bottom:8px;padding-top:12px}
+.step-content p{font-size:15px;color:var(--muted);line-height:1.7}
+
+/* ── UPLOAD SECTION ── */
+.upload-section{
+  padding:80px 24px 100px;
+  max-width:900px;margin:0 auto;
+  text-align:center;
+}
+.upload-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:60px 48px;
+  position:relative;overflow:hidden;
+  margin-top:60px;
+}
+.upload-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 0%,rgba(255,77,143,.1) 0%,transparent 60%);
+  pointer-events:none;
+}
+.upload-card h3{font-family:'Dela Gothic One',sans-serif;font-size:28px;margin-bottom:14px}
+.upload-card p{color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.7}
+.price-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(255,77,143,.2),rgba(155,93,229,.2));
+  border:1px solid rgba(255,77,143,.4);
+  border-radius:100px;padding:10px 24px;
+  font-size:18px;font-weight:800;
+  margin-bottom:32px;
+}
+.price-badge .amount{
+  font-family:'Dela Gothic One',sans-serif;font-size:28px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+
+/* ── CTA SECTION ── */
+.cta-section{
+  padding:80px 24px 120px;
+  text-align:center;
+}
+.cta-inner{
+  max-width:700px;margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:32px;
+  padding:80px 48px;
+  position:relative;overflow:hidden;
+}
+.cta-inner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% -20%,rgba(255,77,143,.15) 0%,transparent 60%);
+  pointer-events:none;
+}
+.cta-inner h2{
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:clamp(36px,6vw,64px);
+  line-height:1.1;margin-bottom:20px;
+}
+.cta-inner p{color:var(--muted);font-size:17px;max-width:400px;margin:0 auto 40px;line-height:1.7}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:32px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.footer-logo{
+  font-family:'Dela Gothic One',sans-serif;
+  font-size:18px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.footer-text{font-size:13px;color:var(--muted)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.reveal{
+  opacity:0;transform:translateY(30px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:rgba(255,77,143,.4);border-radius:3px}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{display:none}
+  .stats{flex-direction:column;gap:12px}
+  .stat{border-radius:12px !important;border:1px solid var(--border) !important}
+  .stat:not(:last-child){border-right:1px solid var(--border) !important}
+  footer{flex-direction:column;gap:16px;text-align:center}
+  .upload-card{padding:40px 24px}
+  .cta-inner{padding:48px 24px}
+  .fake-page{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-shapes">
+  <span></span><span></span><span></span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">WaifuEngine</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#upload">Custom GIF</a></li>
+  </ul>
+  <a href="https://chromewebstore.google.com/detail/waifu-engine-anime-girl-i/onjpnopngnnkefokoigfmeepjidfhjnh?pli=1" target="_blank" class="nav-cta">Add to Chrome — Free</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Chrome Extension · 100% Free</div>
+  <h1>
+    <span class="line1">Your Anime</span>
+    <span class="line2">Companion</span>
+  </h1>
+  <p class="hero-sub">A draggable anime girl overlay that lives on every tab. Pick your character, resize her, move her anywhere. She's always there for you.</p>
+  <div class="hero-btns">
+    <a href="https://chromewebstore.google.com" class="btn-primary">✦ Add to Chrome — It's Free</a>
+    <a href="#features" class="btn-secondary">See Features →</a>
+  </div>
+
+  <!-- BROWSER MOCKUP -->
+  <div class="hero-mockup">
+    <div class="browser">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+          <div class="browser-dot"></div>
+        </div>
+        <div class="browser-url">youtube.com/watch?v=...</div>
+      </div>
+      <div class="browser-content">
+        <div class="fake-page">
+          <div class="fake-page-main">
+            <div class="fake-bar short"></div>
+            <div class="fake-bar med"></div>
+            <div class="fake-bar" style="width:40%"></div>
+            <div class="fake-img-block"></div>
+            <div class="fake-bar med" style="margin-top:12px"></div>
+            <div class="fake-bar short" style="margin-top:6px"></div>
+            <div class="fake-bar" style="width:70%;margin-top:6px"></div>
+          </div>
+        </div>
+
+        <!-- POPUP MOCKUP -->
+        <div class="popup-mockup">
+          <div class="popup-btn-row">
+            <div class="popup-btn">▶ Run</div>
+            <div class="popup-btn">■ Stop</div>
+          </div>
+          <div class="popup-btn-row">
+            <div class="popup-btn">👁 Show</div>
+            <div class="popup-btn">🙈 Hide</div>
+          </div>
+          <div style="height:6px"></div>
+          <div class="popup-char-row">
+            <div class="popup-char-thumb">🌸</div>
+            <div>
+              <div class="popup-char-name">Sakura</div>
+              <div style="font-size:8px;color:#ff85b3;font-weight:700">Active ✦</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WAIFU OVERLAY -->
+        <div class="waifu-overlay">
+          <div style="position:relative">
+            <div class="waifu-drag-hint">Drag me!</div>
+            <div class="waifu-char">🌸</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats reveal">
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Free</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">All</div>
+    <div class="stat-label">Sites Work</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Characters</div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <p class="section-label reveal">Features</p>
+  <h2 class="section-title reveal">Everything you need,<br/>nothing you don't</h2>
+  <p class="section-sub reveal">Simple, lightweight, and packed with the right stuff.</p>
+
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-pink">🎯</div>
+      <h3>Works Everywhere</h3>
+      <p>Your waifu shows up on every single tab — YouTube, Twitter, news sites, everything. She never leaves you.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-purple">✋</div>
+      <h3>Fully Draggable</h3>
+      <p>Grab and drag her anywhere on the screen. Your position is remembered across pages and browser restarts.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-cyan">📏</div>
+      <h3>Resizable</h3>
+      <p>Use the popup slider to scale her from tiny companion to full-screen presence. From 0.5× to 3× size.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-yellow">❤️</div>
+      <h3>Favorites System</h3>
+      <p>Heart your favorite characters to pin them to the top. Switch between characters with a single click.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-pink">🎨</div>
+      <h3>Upload Your Own GIF</h3>
+      <p>Paid unlockable feature — upload any GIF as your overlay. Stored locally, never leaves your device.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon fi-purple">🙈</div>
+      <h3>Show / Hide Toggle</h3>
+      <p>Need to focus? Hide her instantly from the popup. Right-click her to hide too. She'll come back when you want.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <p class="section-label reveal">How it works</p>
+  <h2 class="section-title reveal">Up and running<br/>in 30 seconds</h2>
+  <p class="section-sub reveal">No accounts, no setup, no nonsense.</p>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Install the extension</h3>
+        <p>Click "Add to Chrome" from the Chrome Web Store. It's free and takes about 3 seconds to install.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Pick your character</h3>
+        <p>Click the WaifuEngine icon in your toolbar. Browse the character gallery, heart your favorites, and click any character to activate her.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>She appears on every tab</h3>
+        <p>Your chosen character floats over every webpage. Drag her wherever you want, resize her with the slider, and show/hide with one click.</p>
+      </div>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Make her yours (optional)</h3>
+        <p>Unlock custom GIF uploads for just $2 via Gumroad. Upload any GIF — it stays on your device, zero data sent to any server.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UPLOAD SECTION -->
+<section class="upload-section" id="upload">
+  <p class="section-label reveal">Custom GIF Upload</p>
+  <h2 class="section-title reveal">Bring your own<br/>character</h2>
+
+  <div class="upload-card reveal">
+    <div class="price-badge">
+      Unlock for <span class="amount">&nbsp;$2</span>&nbsp; via Gumroad
+    </div>
+    <h3>Upload any GIF as your overlay</h3>
+    <p>Pay once, upload forever. Your GIF is stored locally on your PC using Chrome storage — it never touches any server. We just verify your $2 purchase via Gumroad's license key API.</p>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:10px 20px;font-size:14px;font-weight:700">
+        🔒 Stored locally only
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:10px 20px;font-size:14px;font-weight:700">
+        ✅ One-time payment
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:100px;padding:10px 20px;font-size:14px;font-weight:700">
+        🎨 Any GIF works
+      </div>
+    </div>
+    <div style="margin-top:36px">
+      <a href="https://gumroad.com/l/WaifuEngine" class="btn-primary">Get Upload Access — $2 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner reveal">
+    <h2>Start for free,<br/>right now</h2>
+    <p>Join the community and add your anime companion to Chrome today. No sign-up required.</p>
+    <a href="https://chromewebstore.google.com" class="btn-primary" style="font-size:18px;padding:18px 48px">
+      ✦ Add to Chrome — Free
+    </a>
+    <p style="margin-top:20px;font-size:13px;color:var(--muted)">Works on Chrome · Chromium · Brave · Edge</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">WaifuEngine</div>
+  <div class="footer-text">Made with 💖 for anime fans everywhere</div>
+  <div class="footer-links">
+    <a href="https://gumroad.com/l/WaifuEngine">Unlock Uploads</a>
+    <a href="https://chromewebstore.google.com">Chrome Store</a>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+  })
+},{threshold:0.1})
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el))
+</script>
+</body>
+</html>
