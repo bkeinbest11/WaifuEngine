@@ -1,0 +1,21 @@
+{
+   "action": {
+      "default_popup": "popup.html",
+      "default_title": "Waifu Engine - Anime girl in my tab"
+   },
+   "content_scripts": [ {
+      "js": [ "content.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_idle"
+   } ],
+   "description": "Shows a draggable anime girl overlay. Pick from samples, favorite, and control by show/hide.",
+   "icons": {
+      "128": "icon128.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAr52ToMf6sAKYMaUjbmCJOq3ERq0Hy5zOFC5FajFr3n3p1vp7IcJgV4P/LEi4g3eUeDX+MeVTtAyJFW1ctTFeM1nn5hgjJOnf6Ta2ASLZwYoed5+PoUlkddJr3WsOU3TKxtErfAopq8YmaH1IRFb7lb5tHVg98xwTDyl5OKcHnJvlUGIQ1veTZRzhMZ68bkdZOIr4NE9wJVex8WDDE/43VJ0IoWxoNHVhqD3pz3ztfYvuCo8qncNVAe8I1AuBiRgFfbhkaGn2crGwr1soKLDyYAc5op6Ba08LkGyHhMOViZFwlVerwrQFSre1wYPV3J4F/23FziLEzMgRLcq9SpVw/QIDAQAB",
+   "manifest_version": 3,
+   "name": "Waifu Engine - Anime girl in my tab",
+   "permissions": [ "storage", "activeTab" ],
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.11"
+}
