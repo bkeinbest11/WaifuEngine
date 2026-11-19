@@ -8,7 +8,7 @@ Features
 
 ⭐ Favorites system — pin your waifus to the top
 
-👀 Show / Hide / Run / Stop controls
+👀 Show / Hide controls
 
 🎯 Draggable floating character
 
